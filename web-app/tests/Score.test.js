@@ -32,9 +32,9 @@ example_game.field = field_string.split("\n").map(
 describe("Score", function () {
     it(
         `A new tetris game
-        * Starts on level one
-        * With no lines cleared
-        * With a score of zero`,
+ * Starts on level one
+ * With no lines cleared
+ * With a score of zero`,
         function () {
             const new_game = Tetris.new_game();
             const score = new_game.score;
@@ -88,7 +88,7 @@ describe("Score", function () {
     it(
         `A double line clear scores 300 × level`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -96,7 +96,7 @@ describe("Score", function () {
     it(
         `A triple line clear scores 500 × level`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -104,7 +104,7 @@ describe("Score", function () {
     it(
         `A tetris scores 800 × level`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -112,7 +112,7 @@ describe("Score", function () {
     it(
         `Back to back tetrises score 1200 × level`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -120,7 +120,7 @@ describe("Score", function () {
     it(
         `A soft drop score 1 point per cell descended`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -128,7 +128,7 @@ describe("Score", function () {
     it(
         `A hard drop score 2 point per cell descended`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );
@@ -136,7 +136,7 @@ describe("Score", function () {
     it(
         `Advancing the turn without manually dropping scores nothing.`,
         function () {
-            // Implement this function.
+            // Implement this test.
             throw new Error("Unimplemented");
         }
     );

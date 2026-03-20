@@ -556,8 +556,6 @@ const clear_lines = R.pipe(
  * @returns {Tetris.Game}
  */
 Tetris.next_turn = function (game) {
-    console.log(game);
-
     if (game.game_over) {
         return game;
     }
