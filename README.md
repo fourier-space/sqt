@@ -1,4 +1,4 @@
-# Computing 2 Tetris Worksheet.
+# Computing 2 Tetris Worksheet
 In this code repository is a module that can simulate a game of Tetris
 `web-app/Tetris.js`
 and a web app to play the game.
@@ -21,6 +21,16 @@ In Tetris, each type of tetromino has a different colour.
 In this version they're all blue.
 
 **Change the css such that each tetromino has a different colour.**
+
+### Game Over and Reset
+Currently, when the game ends, play stops.
+There is no other indication or way to restart the game other than refreshing
+the browser.
+**Implement a user interface for the game-over state and a new game feature that
+starts the game again.**
+
+Make sure this is robust to any new features added in the tasks below and that
+the state is fully cleared out.
 
 ### Next Tetromino Preview
 Part of the game state is the next tetromino to descend after the current one
@@ -195,3 +205,9 @@ Let's review them.
 These can be the top level descriptors of our tests.
 
 1. Read the implementations in `tests/Score.test.js` and implement the missing tests.
+
+## Other Challenges
+* Add more juice to the user interface.
+* Implement further UI features, such as pausing, high scores, etc.
+* Re-implement [rotation](https://tetris.wiki/Super_Rotation_System) to be compliant with the specification. Including T-Spins and kicks.
+* Add [scoring](https://tetris.wiki/Scoring) for "difficult clears"
