@@ -51,7 +51,7 @@ describe("Score", function () {
     );
 
     it(
-        `The score tracks the lines that get cleared`,
+        `The scoring tracks the number lines that get cleared`,
         function () {
             let game = example_game;
             // Slot an I tetromino into the hole and drop.
@@ -135,6 +135,16 @@ describe("Score", function () {
 
     it(
         `Advancing the turn without manually dropping scores nothing.`,
+        function () {
+            // Implement this test.
+            throw new Error("Unimplemented");
+        }
+    );
+
+    it(
+        `Locking in a tetromino
+without manually dropping or clearing a line
+scores nothing.`,
         function () {
             // Implement this test.
             throw new Error("Unimplemented");

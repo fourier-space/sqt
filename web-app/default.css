@@ -21,6 +21,9 @@
     --palette-secondary0: #345e75;
     --palette-secondary1: #3daee9;
 
+
+    --tetromino-colour: #3ae;
+
     --tetromino-I: #3ae;
     --tetromino-O: #fc0;
     --tetromino-T: rgb(174, 81, 255);
@@ -138,41 +141,6 @@ footer
     padding: 0;
     position: relative;
     width: calc(100% / var(--grid-columns));
-}
-
-.cell.I
-{
-    --tetromino-colour: var(--tetromino-I);
-}
-
-.cell.J
-{
-    --tetromino-colour: var(--tetromino-J);
-}
-
-.cell.L
-{
-    --tetromino-colour: var(--tetromino-L);
-}
-
-.cell.O
-{
-    --tetromino-colour: var(--tetromino-O);
-}
-
-.cell.S
-{
-    --tetromino-colour: var(--tetromino-S);
-}
-
-.cell.T
-{
-    --tetromino-colour: var(--tetromino-T);
-}
-
-.cell.Z
-{
-    --tetromino-colour: var(--tetromino-Z);
 }
 
 .cell.I,

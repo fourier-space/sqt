@@ -9,9 +9,9 @@ import Score from "./Score.js";
 const Tetris = {};
 
 
-//----------------------------------------------------------------------------//
-// ## Type Definitions                                                        //
-//----------------------------------------------------------------------------//
+//------------------------------------------------------------------------------
+// #region Type Definitions
+//------------------------------------------------------------------------------
 
 
 /**
@@ -32,7 +32,7 @@ const Tetris = {};
 
 /**
  * A field is the grid whose cells contain the locked in blocks from
- * tetrominos or are empty. The field doesn't contain the current tetromino.
+ * tetrominoes or are empty. The field doesn't contain the current tetromino.
  * It's ordered as a list of lines.
  * @typedef {Tetris.Line[]} Field
  * @memberof Tetris
@@ -65,7 +65,7 @@ const Tetris = {};
 
 /**
  * A tetromino is an arrangement of four blocks connected orthogonally.
- * Tetrominos express their own rotation state.
+ * Tetrominoes express their own rotation state.
  * @typedef {object} Tetromino
  * @memberof Tetris
  * @property {Tetris.Block} block_type The type of the tetromino.
@@ -74,7 +74,7 @@ const Tetris = {};
  */
 
 /**
- * A bag generates sequences of tetrominos.
+ * A bag generates sequences of tetrominoes.
  * It is a function that returns the next tetromino and a new bag.
  * The bag is an abstraction, there need not be a well defined contents.
  * @typedef {function} Tetromino_bag
@@ -84,9 +84,9 @@ const Tetris = {};
  * const [next_piece, next_bag] = bag();
  */
 
-//----------------------------------------------------------------------------//
-// ## Constant Members                                                        //
-//----------------------------------------------------------------------------//
+//------------------------------------------------------------------------------
+// #region Constant Members
+//------------------------------------------------------------------------------
 
 /**
  * I Tetromino
@@ -214,7 +214,7 @@ Tetris.Z_tetromino = Object.freeze({
 
 const empty_block = " ";
 
-const all_tetrominos = [
+const all_tetrominoes = [
     Tetris.I_tetromino,
     Tetris.J_tetromino,
     Tetris.L_tetromino,
@@ -252,9 +252,9 @@ Tetris.field_width = 10;
 
 const starting_position = [Math.floor(Tetris.field_width / 2) - 1, 0];
 
-//----------------------------------------------------------------------------//
-// ## Methods                                                                 //
-//----------------------------------------------------------------------------//
+//------------------------------------------------------------------------------
+// #region Methods
+//------------------------------------------------------------------------------
 
 const random_bag = function (contents) {
     return function () {
@@ -270,7 +270,7 @@ const random_bag = function (contents) {
     };
 };
 
-const new_bag = random_bag(all_tetrominos);
+const new_bag = random_bag(all_tetrominoes);
 
 const new_line = function () {
     return R.repeat(empty_block, Tetris.field_width);
@@ -312,7 +312,7 @@ Tetris.new_game = function () {
  *     The coordinates `[x, y]` of the centre of the tetromino.
  * @returns {number[][]} The List of  coordinates `[x, y]` of each block.
  */
-Tetris.tetromino_coordiates = function (tetromino, position) {
+Tetris.tetromino_coordinates = function (tetromino, position) {
     return tetromino.grid.flatMap(function (row, row_index) {
         return row.flatMap(function (block, column_index) {
             if (block === empty_block) {
@@ -327,25 +327,25 @@ Tetris.tetromino_coordiates = function (tetromino, position) {
 };
 
 const is_blocked_bottom = function (tetromino, position) {
-    return Tetris.tetromino_coordiates(tetromino, position).some(
+    return Tetris.tetromino_coordinates(tetromino, position).some(
         (coord) => coord[1] >= Tetris.field_height
     );
 };
 
 const is_blocked_left = function (tetromino, position) {
-    return Tetris.tetromino_coordiates(tetromino, position).some(
+    return Tetris.tetromino_coordinates(tetromino, position).some(
         (coord) => coord[0] < 0
     );
 };
 
 const is_blocked_right = function (tetromino, position) {
-    return Tetris.tetromino_coordiates(tetromino, position).some(
+    return Tetris.tetromino_coordinates(tetromino, position).some(
         (coord) => coord[0] >= Tetris.field_width
     );
 };
 
 const is_blocked_by_geometry = function (field, tetromino, position) {
-    return Tetris.tetromino_coordiates(tetromino, position).filter(
+    return Tetris.tetromino_coordinates(tetromino, position).filter(
         (coord) => (
             coord[0] >= 0 &&
             coord[0] < Tetris.field_width &&
@@ -520,7 +520,7 @@ const lose = R.set(R.lensProp("game_over"), true);
 
 const lock = function (game) {
     const updated_field = R.clone(game.field);
-    const coords = Tetris.tetromino_coordiates(
+    const coords = Tetris.tetromino_coordinates(
         game.current_tetromino,
         game.position
     );

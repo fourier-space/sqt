@@ -1,6 +1,6 @@
 import R from "./ramda.js";
 import Tetris from "./Tetris.js";
-import Score from "./Score.js";
+// import Score from "./Score.js";
 
 const grid_columns = Tetris.field_width;
 const grid_rows = Tetris.field_height;
@@ -41,7 +41,7 @@ const update_grid = function () {
 
     // Display ghost tetromino
     const ghost_game = R.reduce(Tetris.soft_drop, game, R.range(0, 22));
-    Tetris.tetromino_coordiates(
+    Tetris.tetromino_coordinates(
         ghost_game.current_tetromino,
         ghost_game.position
     ).forEach(
@@ -58,7 +58,7 @@ const update_grid = function () {
     );
 
     // Display currently dropping tetromino
-    Tetris.tetromino_coordiates(game.current_tetromino, game.position).forEach(
+    Tetris.tetromino_coordinates(game.current_tetromino, game.position).forEach(
         function (coord) {
             try {
                 const cell = cells[coord[1]][coord[0]];

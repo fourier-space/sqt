@@ -1,4 +1,4 @@
-# Computing 2 Referred Assessment (Resit) Submission.
+# Computing 2 Tetris Worksheet.
 In this code repository is a module that can simulate a game of Tetris
 `web-app/Tetris.js`
 and a web app to play the game.
@@ -14,16 +14,80 @@ which are targeted to the module assessment criteria.
 ## Setup
 * Run `npm install` in the root directory to install server dependencies (ramda etc.)
 
-## Tasks ##
+## Task: Tetrominoes
+
+### Colourful blocks
+In Tetris, each type of tetromino has a different colour.
+In this version they're all blue.
+
+**Change the css such that each tetromino has a different colour.**
+
+### Next Tetromino Preview
+Part of the game state is the next tetromino to descend after the current one
+locks.
+In most tetris games this is displayed to the player.
+In this module the next tetromino is stored as a property of the game object.
+`game.next_tetromino`.
+
+* Unlike in the online game, you should only show the **one** next tetromino.
+
+**Add a display of the next tetromino to the sidebar**
+
+### Hold Tetromino
+One feature you often see in Tetris games is the ability to *hold* a tetromino.
+If you press hold, `c`, then the current tetromino is taken off the field and held.
+If there was no tetromino already held, then the next tetromino is deployed,
+otherwise if there is a tetromino already held then it is deployed.
+In each case the tetromino is deployed from the top of the field.
+Once you hold a tetromino, you can't hold again until you have locked in a tetromino.
+
+See https://tetris.com/play-tetris for an example of how this works.
+
+**You are going to implement the hold mechanism.**
+1. Add to the documentation of type definition of a `Tetris.Game` (line 16) two fields:
+    1. `held_tetromino`, the tetromino you are holding.
+    2. `can_hold`, a boolean that determines if holding is allowed.
+2. Modify the `Tetris.new_game()` function to have these new fields, and have sensible initial values.
+3. Modify `Tetris.next_turn()` so that the next turn returned also has these two fields.
+4. Document in **jsdoc** a new function `Tetris.hold()` that takes a game, and returns a new game with the current tetromino held.
+5. Implement the `Tetris.hold()` function as specified.
+6. Modify `main.js` to listen for the `c` key being pressed, and holds the tetromino when triggered.
+7. Add a display of the held tetromino to the UI.
+
+### Hold Tetromino - Unit Tests
+We are going to test three behaviours of the hold mechanism.
+1. A held tetromino can be retrieved on a subsequent turn.
+2. Hold can't be performed twice in a row.
+3. If there is no held tetromino and a hold is performed, the *next tetromino* is deployed.
+
+Use the starter code in `web-app/tests/Tetris.test.js`.
+
+For the first test, I have specified using Given-When-Then for this behaviour
+and have implemented the test. You need not modify this one.
+
+For the second test, I have provided a Given-When-Then specification for the test.
+**You should implement this test**
+
+The third test,
+*If there is no held tetromino and a hold is performed, the **next tetromino** is deployed.*,
+needs to be further specified and implemented by you.
+
+**Further specify and implement this test**
+
+Are there any more tests that could be specified for this feature?
+
+Are there any tests you can specify for the next tetromino preview feature?
+
+## Task: Score System
 You have been provided with an implementation of a tetris game.
 In this version, there is no scoring implemented
 and no acceleration of the game as lines are cleared.
 
 Your task will be to implement a scoring system.
 
-In Tetris, points are scored by dropping tetrominos, and clearing lines.
+In Tetris, points are scored by dropping tetrominoes, and clearing lines.
 For every ten lines that are cleared, the game advances a level,
-and the speed that tetrominos descend increases,
+and the speed that tetrominoes descend increases,
 as well as each line cleared scores more points.
 
 We'll be looking at a simplified version of the Tetris Guidelines: https://tetris.wiki/Scoring.
@@ -66,7 +130,7 @@ At this stage, it will always display a score of zero, zero lines cleared, and w
 ### Scoring
 We are going to implement the following ways to score,
 * Clearing lines
-* Dropping tetrominos
+* Dropping tetrominoes
 
 When clearing lines, you get more points for multiple lines cleared at once.
 * Single line – 100 points per level
@@ -99,12 +163,12 @@ Now when playing the game, the score and the level should update as you clear li
 We also want the score to increase by 1 point on a soft-drop (when the tetromino descends faster - i.e. by pressing `[down]` on the keyboard).
 and the score to increase by 2 point on a hard-drop (when the tetromino drops as far as possible and immediately locks  - i.e. by pressing `[space]` on the keyboard)
 
-This is probably best acomplsihed by modifying the
+This is probably best accomplished by modifying the
 `descend` function in `Tetris.js`
 1. Add a function `add_points` to `Score.js` that adds a given number of points to a given score.
 1. Modify the `descend` function to take an numeric parameter, `points`, default value zero.
 1. Where it returns a new game state, `return R.mergeRight(game, {"position": new_position});` with an updated position, update this to update the score with the given number of points.
-1. Update the call to `descend` in `Tetris.soft_drop` and `Tetris.hard_drop` to score 1 and 2 points every descent repsectively.
+1. Update the call to `descend` in `Tetris.soft_drop` and `Tetris.hard_drop` to score 1 and 2 points every descent respectively.
 
 ### Speed
 We want the game to get harder each level.
@@ -126,15 +190,8 @@ Let's review them.
 * A soft drop score 1 point per cell descended
 * A hard drop score 2 point per cell descended
 * Advancing the turn without manually dropping scores nothing.
+* Locking in a tetromino without manually dropping or clearing a line scores nothing.
 
 These can be the top level descriptors of our tests.
 
 1. Read the implementations in `tests/Score.test.js` and implement the missing tests.
-
-## Submission Details
-For this assessment, Fork this repository into your own GitHub.
-When you are complete send me an email with a link to your github repo.
-
-Please submit before 16:00 on Friday 18th August 2023.
-
-Please do get in contact with any questions.
